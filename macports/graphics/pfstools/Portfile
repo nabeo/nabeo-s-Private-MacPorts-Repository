@@ -1,0 +1,76 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: $
+
+PortSystem		1.0
+name			pfstools
+version			1.8.1
+categories		graphics
+maintainers		watanabe.michikazu@gmail.com
+description		pfstools is a set of command line (and one GUI) programs for reading, writing, manipulating and viewing high-dynamic range (HDR) images and video frames. 
+long_description	\
+    pfstools is a set of command line (and one GUI) programs for reading, \
+    writing, manipulating and viewing high-dynamic range (HDR) images and \
+    video frames. All programs in the package exchange data using unix \
+    pipes and a simple generic HDR image format (pfs). The concept of the \
+    pfstools is similar to netpbm package for low-dynamic range images.
+homepage		http://pfstools.sourceforge.net/
+platforms		darwin
+master_sites	sourceforge:pfstools
+checksums \
+    md5 485507fd077c153accd8522f2a7d0612 \
+    sha1 4d2f3a18c270d2d5c4442eb6f6750eca2aa99976
+
+depends_lib	\
+	port:pkgconfig port:libiconv port:lcms port:jpeg \
+    port:libpng port:libxml2 port:netpbm port:libpng \
+
+set docs 		{AUTHORS COPYING ChangeLog INSTALL NEWS README README.OSX README.matlab TODO}
+
+configure.args 	\
+    --mandir=${prefix}/share/man \
+    --infodir=${prefix}/share/info \
+    --disable-qt \
+    --disable-openexr \
+    --disable-tiff \
+    --disable-imagemagick \
+    --disable-octave \
+    --disable-opengl \
+    --disable-matlab \
+    --disable-gdal \
+    --disable-jpeghdr \
+
+post-destroot	{
+	xinstall -d -m 755 ${destroot}${prefix}/share/doc/${name}
+	foreach D ${docs} {
+		xinstall -m 755 ${worksrcpath}/${D} \
+		${destroot}${prefix}/share/doc/${name}
+	}
+	}
+
+variant openexr description {compile programs that use OpenEXR library} {
+	depends_lib-append port:openexr 
+	configure.args-delete --disable-openexr
+	}
+variant tiff description {compile programs that use TIFF library} {
+	depends_lib-append port:tiff
+	configure.args-delete --disable-tiff
+	}
+variant imagemagick description {compile programs that use ImageMagick library} {
+	depends_lib-append port:ImageMagick
+	configure.args-delete --disable-imagemagick
+	}
+variant octave description {compile octave interface functions} {
+	depends_lib-append port:octave
+	configure.args-delete --disable-octave
+	}
+variant opengl description {compile opengl code (pfsglview)} {
+	configure.args-delete --disable-opengl
+	}
+variant gdal description {compile programs that use GDAL library} {
+	depends_lib-append port:gdal
+	configure.args-delete --disable-gdal
+	}
+
+variant debug 	{
+	configure.args-append --enable-debug
+	}

@@ -1,0 +1,39 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: $
+
+PortSystem		1.0
+name			pfstmo
+version			1.4
+categories		graphics
+maintainers		watanabe.michikazu@gmail.com
+description		This package is implemented using floating-point pipe streaming implemented in pfstools library.
+long_description	\
+    This package is implemented using floating-point pipe streaming implemented in \
+    pfstools library.
+homepage		http://pfstools.sourceforge.net/
+platforms		darwin
+master_sites	sourceforge:pfstools
+checksums \
+    md5 90409a9adda70f59001c04cafcdab8d6 \
+    sha1 2c220be494a0cb136b99cbbf56835cf19c0672ee
+
+depends_lib	\
+	port:pfstools port:fftw-3 port:gsl
+
+set docs 		{AUTHORS COPYING ChangeLog INSTALL NEWS README TODO}
+
+configure.args 	\
+    --mandir=${prefix}/share/man \
+    --infodir=${prefix}/share/info
+
+post-destroot	{
+	xinstall -d -m 755 ${destroot}${prefix}/share/doc/${name}
+	foreach D ${docs} {
+		xinstall -m 755 ${worksrcpath}/${D} \
+		${destroot}${prefix}/share/doc/${name}
+	}
+	}
+
+variant debug 	{
+	configure.args-append --enable-debug
+	}
