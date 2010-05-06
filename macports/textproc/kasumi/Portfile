@@ -2,7 +2,7 @@
 
 PortSystem      1.0
 name            kasumi
-version         2.4
+version         2.5
 revision        1
 categories      textproc
 maintainers     watanabe.michikazu@gmail.com
@@ -10,13 +10,13 @@ description     kasumi is a personal dictionary manager for Anthy
 long_description       kasumi is a personal dictionary manager for Anthy
 homepage        http://kasumi.sourceforge.jp/
 platforms       darwin
-set sfj         37311
+set sfj         41436
 master_sites    http://osdn.dl.sourceforge.jp/kasumi/${sfj}/ \
                 http://qgpop.dl.sourceforge.jp/kasumi/${sfj}/ \
                 http://keihanna.dl.sourceforge.jp/kasumi/${sfj}/
-checksums       md5     683f43fbf8ba3c92964a538c0d21afc7 \
-                sha1    d2d3ce8650bfbf8cc4568ea24a7e40e70f442c43 \
-                rmd160  ba93405b13da68a8c565fd018305ef199e927aee
+checksums       md5     f49d010cf1fa5672b4515502b961b8c8 \
+                sha1    38155494d684f61e74ed1498ec90cc0fc68d791a \
+                rmd160  b609988d585b387acf83f5e7f6f58d6b10c80dd3
 
 set docs        {ABOUT-NLS AUTHORS COPYING ChangeLog INSTALL NEWS README}
 depends_lib     port:anthy \
