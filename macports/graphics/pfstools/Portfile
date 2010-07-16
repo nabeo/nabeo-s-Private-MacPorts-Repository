@@ -3,7 +3,7 @@
 
 PortSystem		1.0
 name			pfstools
-version			1.8.1
+version			1.8.2
 categories		graphics
 maintainers		watanabe.michikazu@gmail.com
 description		pfstools is a set of command line (and one GUI) programs for reading, writing, manipulating and viewing high-dynamic range (HDR) images and video frames. 
@@ -17,8 +17,8 @@ homepage		http://pfstools.sourceforge.net/
 platforms		darwin
 master_sites	sourceforge:pfstools
 checksums \
-    md5 485507fd077c153accd8522f2a7d0612 \
-    sha1 4d2f3a18c270d2d5c4442eb6f6750eca2aa99976
+    md5 8b6e4ec3cc98fe55e676121dba28b41b \
+    sha1 6109587b0f8e53d1d963e9e02f7298bf0d197d5d
 
 depends_lib	\
 	port:pkgconfig port:libiconv port:lcms port:jpeg \
