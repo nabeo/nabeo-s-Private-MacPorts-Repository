@@ -3,9 +3,9 @@
 PortSystem 1.0
 
 name              gnupod
-version           0.99.7
+version           0.99.8
 categories        multimedia perl
-maintainers       pmq
+maintainers       nabeo
 platforms         darwin
 
 description       GNUpod is a collection of tools which allow you to \
@@ -15,7 +15,7 @@ long_description  ${description}
 homepage          http://blinkenlights.ch/gnupod
 master_sites      http://www.blinkenlights.ch/gnupod-dist/stable
 extract.suffix    .tgz
-checksums         sha1 3aa4b32cc896af435fb52d4bb154ee950ad08ce1
+checksums         sha1 2eb6a101ed2f6dc69491ce51703aac238564e0cb
 
 depends_lib       path:bin/perl:perl5 port:p5-mp3-info port:p5-digest-md5 \
                   port:p5-xml-parser port:p5-unicode-string \
