@@ -1,0 +1,97 @@
+# $Id: $
+
+PortSystem		1.0
+name				uim
+version			1.6.0
+categories		textproc
+maintainers		watanabe.michikazu@gmail.com
+description		Uim is a lightweight and full featured input method library.
+long_description	\
+	Uim is a lightweight and full featured input method library.\
+	Most of the functionalites in this library are implemented with\
+	Scheme. Thus it is simple, secure and flexible. Uim does not\
+	require you to setup and run network servers.
+
+homepage		http://code.google.com/p/uim/
+platforms			darwin
+master_sites	http://uim.googlecode.com/files/
+use_bzip2 		yes
+checksums		sha1 d27f2ca8136da0702c82f0522911d06b2b8f8ea7
+
+depends_lib		lib:libglib.2:glib2 lib:libiconv.2:libiconv \
+				lib:libintl.3:gettext lib:libpango-1.0.0:pango \
+				lib:libgtk-x11-2.0.0:gtk2
+
+set docs 		{AUTHORS COPYING ChangeLog ChangeLog.old INSTALL NEWS README RELNOTE}
+
+configure.cppflags-append 	-I${prefix}/include/qt3
+configure.ldflags-append	-L${prefix}/lib/qt3 -L/usr/X11R6/lib -lX11
+configure.args 	--mandir=${prefix}/share/man \
+				--infodir=${prefix}/share/info \
+				--with-x --with-xft \
+				--enable-pref \
+				--without-canna \
+				--disable-emacs \
+				--disable-fep \
+				--without-eb \
+				--without-anthy \
+				--without-prime \
+				--without-m17nlib \
+				--without-qt \
+				--without-qt-immodule
+
+post-destroot	{
+	xinstall -d -m 755 ${destroot}${prefix}/share/doc/${name}
+	foreach D ${docs} {
+		xinstall -m 755 ${worksrcpath}/${D} \
+		${destroot}${prefix}/share/doc/${name}
+	}
+	}
+
+variant emacs	{
+	depends_lib-append bin:emacs:emacs
+	configure.args-delete --disable-emacs
+	configure.args-append --enable-emacs
+	}
+variant fep		{
+	configure.args-delete --disable-fep
+	configure.args-append --enable-fep
+	}
+
+variant debug 	{
+	configure.args-append --enable-debug
+	}
+
+variant anthy 	{
+	depends_lib-append lib:libanthy:anthy
+	configure.args-delete --without-anthy
+	configure.args-append --with-anthy --enable-dict
+	configure.env-append ANTHY_CFLAGS=-I${prefix}/include\
+			     ANTHY_LIBS="-L${prefix}/lib -lanthy"
+   	}
+
+variant prime  	{
+	depends_lib-append bin:prime:prime
+	configure.args-delete --without-prime
+	configure.args-append --with-prime
+   	}
+
+variant m17n   	{
+	depends_lib-append lib:libm17n:m17n-lib
+	configure.args-delete --without-m17nlib
+	configure.args-append --with-m17nlib
+  	}
+
+
+variant eb		{
+	depends_lib-append port:eb
+	configure.args-delete --without-eb
+	configure.args-append --with-eb
+	}
+
+#variant qt		{
+#	depends_lib-append port:qt3
+#	configure.args-delete --without-qt --without-qt-immodule
+#	configure.args-append --with-qt --with-qt-immodule
+#	}
+

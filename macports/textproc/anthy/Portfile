@@ -1,0 +1,21 @@
+# $Id:  $
+
+PortSystem		1.0
+name			anthy
+version			9100h
+categories		textproc
+maintainers		watanabe.michikazu@gmail.com
+description		Anthy is a system for Japanese input method.
+long_description		 \
+	Anthy is a system for Japanese input method. It converts Hiragana text to\
+	Kana Kanji mixed text.
+
+homepage		http://anthy.sourceforge.jp/
+set sfj 		37536
+master_sites    http://osdn.dl.sourceforge.jp/anthy/${sfj}/ \
+				http://qgpop.dl.sourceforge.jp/anthy/${sfj}/ \
+				http://keihanna.dl.sourceforge.jp/anthy/${sfj}/
+checksums	md5    1f558ff7ed296787b55bb1c6cf131108 \
+			sha1   bfea9e74e208c4b976b6bd7ac6784cd290c636fd \
+			rmd160 6ddb26c0a47daf2f765b2973817cfbe84fa85606
+
