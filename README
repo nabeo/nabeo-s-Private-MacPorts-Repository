@@ -1,1 +1,8 @@
+How To add your local repository
 
+1. cd /path/to/anywhere
+2. git http://github.com/nabeo/nabeo-s-Private-MacPorts-Repository.git local
+3. add line ${prefix}/etc/macports/sources.conf (nomaly, ${prefix} is /opt/local)
+   file:///path/to/anywhere/local/macports
+4. cd /path/to/anywhere/local
+5. portindex
