@@ -34,6 +34,6 @@ post-destroot	{
 	}
 	}
 
-variant debug 	{
+variant debug description {enable debug} {
 	configure.args-append --enable-debug
 	}

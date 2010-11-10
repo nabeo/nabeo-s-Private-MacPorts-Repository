@@ -12,6 +12,7 @@ long_description		 \
 
 homepage		http://anthy.sourceforge.jp/
 set sfj 		37536
+platforms		darwin
 master_sites    http://osdn.dl.sourceforge.jp/anthy/${sfj}/ \
 				http://qgpop.dl.sourceforge.jp/anthy/${sfj}/ \
 				http://keihanna.dl.sourceforge.jp/anthy/${sfj}/

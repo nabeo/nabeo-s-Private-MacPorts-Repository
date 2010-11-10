@@ -22,7 +22,7 @@ checksums \
 
 depends_lib	\
 	port:pkgconfig port:libiconv port:lcms port:jpeg \
-    port:libpng port:libxml2 port:netpbm port:libpng \
+    port:libxml2 port:netpbm port:libpng \
 
 set docs 		{AUTHORS COPYING ChangeLog INSTALL NEWS README README.OSX README.matlab TODO}
 
@@ -71,6 +71,6 @@ variant gdal description {compile programs that use GDAL library} {
 	configure.args-delete --disable-gdal
 	}
 
-variant debug 	{
+variant debug description {enable debug} {
 	configure.args-append --enable-debug
 	}

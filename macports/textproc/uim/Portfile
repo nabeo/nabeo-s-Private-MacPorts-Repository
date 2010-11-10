@@ -48,21 +48,21 @@ post-destroot	{
 	}
 	}
 
-variant emacs	{
+variant emacs description {enable emacs} {
 	depends_lib-append bin:emacs:emacs
 	configure.args-delete --disable-emacs
 	configure.args-append --enable-emacs
 	}
-variant fep		{
+variant fep	description {enable fep} {
 	configure.args-delete --disable-fep
 	configure.args-append --enable-fep
 	}
 
-variant debug 	{
+variant debug description {enable debug} {
 	configure.args-append --enable-debug
 	}
 
-variant anthy 	{
+variant anthy description {enable anthy} {
 	depends_lib-append lib:libanthy:anthy
 	configure.args-delete --without-anthy
 	configure.args-append --with-anthy --enable-dict
@@ -70,26 +70,26 @@ variant anthy 	{
 			     ANTHY_LIBS="-L${prefix}/lib -lanthy"
    	}
 
-variant prime  	{
+variant prime description {enable prime} {
 	depends_lib-append bin:prime:prime
 	configure.args-delete --without-prime
 	configure.args-append --with-prime
    	}
 
-variant m17n   	{
+variant m17n description {enable m17n} {
 	depends_lib-append lib:libm17n:m17n-lib
 	configure.args-delete --without-m17nlib
 	configure.args-append --with-m17nlib
   	}
 
 
-variant eb		{
+variant eb description {enable eb} {
 	depends_lib-append port:eb
 	configure.args-delete --without-eb
 	configure.args-append --with-eb
 	}
 
-#variant qt		{
+#variant qt	description {enable qt} {
 #	depends_lib-append port:qt3
 #	configure.args-delete --without-qt --without-qt-immodule
 #	configure.args-append --with-qt --with-qt-immodule
