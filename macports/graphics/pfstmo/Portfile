@@ -8,6 +8,7 @@ categories		graphics
 maintainers		watanabe.michikazu@gmail.com
 description		This package is implemented using floating-point pipe streaming implemented in pfstools library.
 long_description	\
+    CAUTION!! This package can not be complied with Snow Leaopard. \
     This package is implemented using floating-point pipe streaming implemented in \
     pfstools library.
 homepage		http://pfstools.sourceforge.net/
