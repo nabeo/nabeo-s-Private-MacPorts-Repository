@@ -2,7 +2,7 @@
 
 PortSystem		1.0
 name				uim
-version			1.6.0
+version			1.6.1
 categories		textproc
 maintainers		watanabe.michikazu@gmail.com
 description		Uim is a lightweight and full featured input method library.
@@ -16,13 +16,13 @@ homepage		http://code.google.com/p/uim/
 platforms			darwin
 master_sites	http://uim.googlecode.com/files/
 use_bzip2 		yes
-checksums		sha1 d27f2ca8136da0702c82f0522911d06b2b8f8ea7
+checksums		sha1 412bb2df6041185084e2f64fb73357389bf992b5
 
 depends_lib		lib:libglib.2:glib2 lib:libiconv.2:libiconv \
 				lib:libintl.3:gettext lib:libpango-1.0.0:pango \
 				lib:libgtk-x11-2.0.0:gtk2
 
-set docs 		{AUTHORS COPYING ChangeLog ChangeLog.old INSTALL NEWS README RELNOTE}
+set docs 		{AUTHORS COPYING ChangeLog ChangeLog.old INSTALL NEWS README RELNOTE doc/00INDEX doc/COMPATIBILITY doc/CUSTOM doc/DOT-UIM doc/ENV doc/HELPER-CANDWIN doc/HELPER-PROTOCOL doc/KEY doc/PACKAGING doc/PLUGIN doc/RELEASING doc/UIM-SCM doc/UIM-SH doc/UNIT-TEST}
 
 configure.cppflags-append 	-I${prefix}/include/qt3
 configure.ldflags-append	-L${prefix}/lib/qt3 -L/usr/X11R6/lib -lX11
@@ -89,6 +89,17 @@ variant eb description {enable eb} {
 	configure.args-append --with-eb
 	}
 
+variant no_x11 description {disable x11} {
+    depends_lib-delete lib:libgtk-x11-2.0.0:gtk2
+    configure.cppflags-delete -I${prefix}/include/qt3
+    configure.ldflags-delete -L${prefix}/lib/qt3 -L/usr/X11R6/lib -lX11
+    configure.args-delete --with-x11 \
+                          --with-xft
+    configure.args-append --without-gtk2 \
+                          --without-x11 \
+                          --without-xft
+
+}
 #variant qt	description {enable qt} {
 #	depends_lib-append port:qt3
 #	configure.args-delete --without-qt --without-qt-immodule
