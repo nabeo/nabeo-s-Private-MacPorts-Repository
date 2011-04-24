@@ -3,7 +3,7 @@
 
 PortSystem		1.0
 name			pfscalibration
-version			1.4
+version			1.5
 categories		graphics
 maintainers		watanabe.michikazu@gmail.com
 description		This package is implemented using floating-point pipe streaming implemented in pfstools library.
@@ -14,8 +14,8 @@ homepage		http://pfstools.sourceforge.net/
 platforms		darwin
 master_sites	sourceforge:pfstools
 checksums \
-    md5 1844a6e3f03f585dbc8bcc3eaacf66b9 \
-    sha1 25ec0bed062953f75c8b5faae70adf964004ca51
+    md5 532efe0a6bf563d36d4bdec8dbe3e5a8 \
+    sha1 98779e89fc2591c7ad6f28536316869c12704ea1
 
 depends_lib	\
 	port:pfstools
