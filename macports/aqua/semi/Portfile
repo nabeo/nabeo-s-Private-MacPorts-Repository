@@ -1,0 +1,35 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: $
+
+PortSystem 1.0
+
+name		semi
+version		1.14.6
+revision	0
+categories	aqua editors devel
+maintainers	nabeo
+description	SEMI is a library to provide MIME feature for GNU Emacs.
+
+long_description SEMI is a library to provide MIME feature for GNU Emacs.  MIME is a \
+                 proposed internet standard for including content and headers other
+
+platforms      darwin
+homepage       http://www.kanji.zinbun.kyoto-u.ac.jp/~tomo/elisp/SEMI
+master_sites   http://kanji.zinbun.kyoto-u.ac.jp/~tomo/lemi/dist/semi/semi-1.14-for-flim-1.14
+extract.suffix .tar.gz
+checksums      sha1   a7ed1b391abf837d3483243456936f51910f9894 \
+               rmd160 b9ff87671e477eacb05e3a746b8f7fc776713305 \
+               md5    22d735fa218c8c6268cd2c9395cd837b
+
+depends_lib port:emacs-app port:apel port:flim
+
+use_configure no
+
+build {
+    system "cd ${worksrcpath} && make elc EMACS=${applications_dir}/Emacs.app/Contents/MacOS/Emacs PREFIX=${destroot}${applications_dir}/Emacs.app/Contents/Resources LISPDIR=${destroot}${applications_dir}/Emacs.app/Contents/Resources/site-lisp VERSION_SPECIFIC_LISPDIR=${destroot}${applications_dir}/Emacs.app/Contents/Resources/site-lisp"
+}
+
+destroot {
+	xinstall -m 755 -d ${destroot}${applications_dir}
+    system "cd ${worksrcpath} && make install EMACS=${applications_dir}/Emacs.app/Contents/MacOS/Emacs PREFIX=${destroot}${applications_dir}/Emacs.app/Contents/Resources LISPDIR=${destroot}${applications_dir}/Emacs.app/Contents/Resources/site-lisp VERSION_SPECIFIC_LISPDIR=${destroot}${applications_dir}/Emacs.app/Contents/Resources/site-lisp"
+}

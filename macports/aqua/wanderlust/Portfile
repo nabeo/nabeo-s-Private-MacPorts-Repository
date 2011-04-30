@@ -1,0 +1,47 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: $
+
+PortSystem 1.0
+
+name		wanderlust
+version		2.15.9
+revision	cvs20110501
+categories	aqua editors mail
+maintainers	nabeo
+description	mail/news management system with IMAP4rev1 support for Emacs
+
+long_description Wanderlust is a mail/news management system with IMAP4rev1 \
+support for Emacs.
+
+platforms      darwin
+homepage       http://www.gohome.org/wl
+
+fetch.type cvs
+cvs.root   :pserver:anonymous@cvs.m17n.org:/cvs/root
+cvs.tag    HEAD
+cvs.date   "01-May-2011"
+cvs.module wanderlust
+worksrcdir wanderlust
+
+depends_lib port:emacs-app port:apel port:flim port:semi
+
+use_configure no
+
+build {
+    system "cd ${worksrcpath} && \
+make elc EMACS=${applications_dir}/Emacs.app/Contents/MacOS/Emacs \
+         PREFIX=${destroot}${applications_dir}/Emacs.app/Contents/Resources \
+         LISPDIR=${destroot}${applications_dir}/Emacs.app/Contents/Resources/site-lisp \
+         INFODIR=${destroot}${applications_dir}/Emacs.app/Contents/Resources/info \
+         PIXMAPDIR=${destroot}${applications_dir}/Emacs.app/Contents/Resources/etc/wl/icons"
+}
+
+destroot {
+	xinstall -m 755 -d ${destroot}${applications_dir}
+    system "cd ${worksrcpath} && \
+make install EMACS=${applications_dir}/Emacs.app/Contents/MacOS/Emacs \
+             PREFIX=${applications_dir}/Emacs.app/Contents/Resources \
+             LISPDIR=${applications_dir}/Emacs.app/Contents/Resources/site-lisp \
+             INFODIR=${applications_dir}/Emacs.app/Contents/Resources/info \
+             PIXMAPDIR=${applications_dir}/Emacs.app/Contents/Resources/etc/wl/icons"
+}
