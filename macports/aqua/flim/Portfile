@@ -1,0 +1,35 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: $
+
+PortSystem 1.0
+
+name		flim
+version		1.14.9
+revision	0
+categories	aqua editors devel
+maintainers	nabeo
+description	Basic library for handling email messages for Emacs
+
+long_description FLIM is a library to provide basic features about message \
+                 representation and encoding for Emacs.
+
+platforms      darwin
+homepage       http://www.kanji.zinbun.kyoto-u.ac.jp/~tomo/elisp/FLIM/
+master_sites   http://www.kanji.zinbun.kyoto-u.ac.jp/~tomo/comp/emacsen/lisp/flim/flim-1.14
+extract.suffix .tar.gz
+checksums      sha1   fc3f1ecfa757d83b10693dc74d890a1ad7db7abd \
+               rmd160 d7fb99ffabe477afd958589e8e386b7d4e628822 \
+               md5    3dca42e2a1af4b089bb3f177bcf9321b
+
+depends_lib port:emacs-app port:apel
+
+use_configure no
+
+build {
+    system "cd ${worksrcpath} && make elc EMACS=${applications_dir}/Emacs.app/Contents/MacOS/Emacs PREFIX=${destroot}${applications_dir}/Emacs.app/Contents/Resources LISPDIR=${destroot}${applications_dir}/Emacs.app/Contents/Resources/site-lisp VERSION_SPECIFIC_LISPDIR=${destroot}${applications_dir}/Emacs.app/Contents/Resources/site-lisp"
+}
+
+destroot {
+	xinstall -m 755 -d ${destroot}${applications_dir}
+    system "cd ${worksrcpath} && make install EMACS=${applications_dir}/Emacs.app/Contents/MacOS/Emacs PREFIX=${destroot}${applications_dir}/Emacs.app/Contents/Resources LISPDIR=${destroot}${applications_dir}/Emacs.app/Contents/Resources/site-lisp VERSION_SPECIFIC_LISPDIR=${destroot}${applications_dir}/Emacs.app/Contents/Resources/site-lisp"
+}
