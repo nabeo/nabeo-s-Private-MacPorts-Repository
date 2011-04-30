@@ -39,6 +39,11 @@ patchfiles      patch-src_unexmacosx.c.diff
 variant fullscreen description {Add fullscreen patch from http://gist.github.com/291150 as mentioned in http://www.sanityinc.com/full-screen-support-for-cocoa-emacs-on-osx} {
     patchfiles-append patch-fullscreen.diff
 }
+variant inline description {Add inline_patch from http://sourceforge.jp/projects/macemacsjp/releases/?package_id=2617} {
+    build.target bootstrap
+    patchfiles-append font.patch
+    patchfiles-append emacs-inline.patch
+}
 
 destroot {
         system "cd ${worksrcpath} && make install"
