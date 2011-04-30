@@ -32,6 +32,10 @@ build.env EMACS=${applications_dir}/Emacs.app/Contents/MacOS/Emacs \
 
 build.target elc
 
+build {
+    system "cd ${worksrcpath} && make elc EMACS=${applications_dir}/Emacs.app/Contents/MacOS/Emacs PREFIX=${destroot}${applications_dir}/Emacs.app/Contents/Resources LISPDIR=${destroot}${applications_dir}/Emacs.app/Contents/Resources/site-lisp VERSION_SPECIFIC_LISPDIR=${destroot}${applications_dir}/Emacs.app/Contents/Resources/site-lisp"
+}
+
 destroot {
 	xinstall -m 755 -d ${destroot}${applications_dir}
     system "cd ${worksrcpath} && make install EMACS=${applications_dir}/Emacs.app/Contents/MacOS/Emacs PREFIX=${destroot}${applications_dir}/Emacs.app/Contents/Resources LISPDIR=${destroot}${applications_dir}/Emacs.app/Contents/Resources/site-lisp VERSION_SPECIFIC_LISPDIR=${destroot}${applications_dir}/Emacs.app/Contents/Resources/site-lisp"
