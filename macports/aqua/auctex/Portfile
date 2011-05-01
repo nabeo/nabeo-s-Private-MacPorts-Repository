@@ -1,0 +1,35 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: $
+
+PortSystem 1.0
+
+name		auctex
+version		11.86
+revision	0
+categories	aqua editors mail
+maintainers	nabeo
+description	Enhanced TeX modes for Emacs
+
+long_description \
+AUCTeX is an extensible package that supports writing and formatting \
+TeX files for most variants of Emacs.
+
+platforms      darwin
+homepage       http://www.gnu.org/software/auctex/
+master_sites   gnu:auctex
+checksums      md5     6bc33a67b6ac59db1aa238f3693b36d2 \
+               sha1    af3dd156f8b2db7764c86d9f7de8abd5811d888a \
+               rmd160  48c84c8e0a9d7659aeb80f579dc6807dd8f654a6
+
+depends_lib port:emacs-app
+prefix      ${applications_dir}/Emacs.app/Contents/Resources
+
+patchfiles  disable-info.patch
+
+configure.args-append --disable-preview
+configure.args-append --with-emacs=${applications_dir}/Emacs.app/Contents/MacOS/Emacs
+configure.args-append --datarootdir=${applications_dir}/Emacs.app/Contents/Resources
+
+# post-build {
+#     file delete ${destroot}${applications_dir}/Emacs.app/Contents/Resources/info/dir
+# }
