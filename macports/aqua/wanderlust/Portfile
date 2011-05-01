@@ -26,6 +26,10 @@ depends_lib port:emacs-app port:apel port:flim port:semi
 
 use_configure no
 
+variant wl-utils description {install utils collection} {
+    patchfiles-append patch-wl-utils-install.patch
+}
+
 build {
     system "\
 cd ${worksrcpath} && \
