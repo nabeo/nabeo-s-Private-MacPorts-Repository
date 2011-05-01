@@ -1,0 +1,42 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: $
+
+PortSystem 1.0
+
+name		bbdb
+version		2.35
+revision	0
+categories	aqua editors mail
+maintainers	nabeo
+description	A contact management utility for use with Emacs
+
+long_description \
+The Insidious Big Brother Database (BBDB) is a contact management \
+utility created by Jamie Zawinski for use with Emacs. It is tightly \
+integrated with several mail and news readers, allowing it to create \
+database entries directly from mail and news messages. As is usual \
+with applications for Emacs, this record creation can be configured in \
+many ways, ranging from a boolean create/don't create setting to \
+creation based on the result of a user-supplied function.
+
+platforms      darwin
+homepage       http://bbdb.sourceforge.net/
+master_sites   sourceforge:bbdb
+checksums      md5     6668c6bcad5305cff1d1ffa8a71cbaf9 \
+               sha1    5fc27ed404e7de1628494a706da96504398ffd20
+
+depends_lib port:emacs-app
+
+configure.args --with-emacs=${applications_dir}/Emacs.app/Contents/MacOS/Emacs
+configure.args --prefix=${applications_dir}/Emacs.app/Contents/Resources
+
+destroot {
+    xinstall -m 755 -d ${destroot}${applications_dir}/Emacs.app/Contents/Resources/site-lisp/bbdb
+    xinstall -m 755 -d ${destroot}${applications_dir}/Emacs.app/Contents/Resources/info
+    system "\
+cp ${worksrcpath}/lisp/*.el ${worksrcpath}/lisp/*.elc \
+${destroot}${applications_dir}/Emacs.app/Contents/Resources/site-lisp/bbdb
+"
+    xinstall -m 644 ${worksrcpath}/texinfo/bbdb.info \
+        ${destroot}${applications_dir}/Emacs.app/Contents/Resources/info
+}
