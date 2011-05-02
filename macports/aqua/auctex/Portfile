@@ -6,7 +6,7 @@ PortSystem 1.0
 name		auctex
 version		11.86
 revision	0
-categories	aqua editors mail
+categories	aqua editors utility
 maintainers	nabeo
 description	Enhanced TeX modes for Emacs
 
