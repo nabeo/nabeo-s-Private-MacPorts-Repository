@@ -1,0 +1,40 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: $
+
+PortSystem 1.0
+
+name		navi2ch
+version		2.0.0-cvs20110408
+revision	0
+categories	aqua editors web
+maintainers	nabeo
+description	navigator for 2ch.
+
+long_description Navi2ch is a navigator for 2ch which works on many Emacsen \
+                 like GNU Emacs, XEmacs, and Meadow.
+
+platforms      darwin
+homepage       http://navi2ch.sourceforge.net/
+
+fetch.type git
+git.url    git://navi2ch.git.sourceforge.net/gitroot/navi2ch/navi2ch
+git.branch origin/master
+worksrcdir navi2ch
+
+depends_lib port:emacs-app port:apel port:wanderlust
+
+configure.env EMACS=${applications_dir}/Emacs.app/Contents/MacOS/Emacs
+
+configure.args-append --with-lispdir ${destroot}${applications_dir}/Emacs.app/Contents/Resources/site-lisp/navi2ch
+configure.args-append --with-icondir ${destroot}${applications_dir}/Emacs.app/Contents/Resources/etc/navi2ch/icons
+configure.args-append --infodir ${destroot}${applications_dir}/Emacs.app/Contents/Resources/info
+
+destroot {
+    xinstall -m 755 -d ${destroot}${applications_dir}/Emacs.app/Contents/Resources/site-lisp/navi2ch
+    xinstall -m 755 -d ${destroot}${applications_dir}/Emacs.app/Contents/Resources/etc/navi2ch/icons
+    system "\
+cp ${worksrcpath}/*.el ${worksrcpath}/*.elc \
+${destroot}${applications_dir}/Emacs.app/Contents/Resources/site-lisp/navi2ch"
+    system "\
+cp ${worksrcpath}/icons/*.xpm ${destroot}${applications_dir}/Emacs.app/Contents/Resources/etc/navi2ch/icons"
+}
