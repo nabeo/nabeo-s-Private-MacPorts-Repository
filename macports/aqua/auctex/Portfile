@@ -22,14 +22,11 @@ checksums      md5     6bc33a67b6ac59db1aa238f3693b36d2 \
                rmd160  48c84c8e0a9d7659aeb80f579dc6807dd8f654a6
 
 depends_lib port:emacs-app
-prefix      ${applications_dir}/Emacs.app/Contents/Resources
 
 patchfiles  disable-info.patch
 
 configure.args-append --disable-preview
 configure.args-append --with-emacs=${applications_dir}/Emacs.app/Contents/MacOS/Emacs
+configure.args-append --with-lispdir=${applications_dir}/Emacs.app/Contents/Resources/site-lisp
 configure.args-append --datarootdir=${applications_dir}/Emacs.app/Contents/Resources
-
-# post-build {
-#     file delete ${destroot}${applications_dir}/Emacs.app/Contents/Resources/info/dir
-# }
+configure.args-append --with-auto-dir=${applications_dir}/Emacs.app/Contents/Resources/var/auctex
