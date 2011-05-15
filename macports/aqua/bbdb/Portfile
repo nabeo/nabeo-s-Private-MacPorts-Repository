@@ -27,8 +27,13 @@ checksums      md5     6668c6bcad5305cff1d1ffa8a71cbaf9 \
 
 depends_lib port:emacs-app
 
-configure.args --with-emacs=${applications_dir}/Emacs.app/Contents/MacOS/Emacs
-configure.args --prefix=${applications_dir}/Emacs.app/Contents/Resources
+build.env EMACS=${applications_dir}/Emacs.app/Contents/MacOS/Emacs
+
+configure.args --with-emacs=${applications_dir}/Emacs.app/Contents/MacOS/Emacs \
+
+pre-build {
+    system "cd ${worksrcpath} && make autoloadsc"
+}
 
 destroot {
     xinstall -m 755 -d ${destroot}${applications_dir}/Emacs.app/Contents/Resources/site-lisp/bbdb
