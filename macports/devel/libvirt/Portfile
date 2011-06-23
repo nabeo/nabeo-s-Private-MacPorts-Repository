@@ -1,0 +1,56 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: $
+
+PortSystem		1.0
+name			libvirt
+version			0.7.5
+categories		devel
+maintainers		watanabe.michikazu@gmail.com
+description		LibVirt: simpel API for virtualization
+long_description	\
+ Libvirt is a C toolkit to interact with the virtualization capabilities \
+ of recent versions of Linux (and other OSes). It is free software \
+ available under the GNU Lesser General Public License. Virtualization of \
+ the Linux Operating System means the ability to run multiple instances of \
+ Operating Systems concurrently on a single hardware system where the basic \
+ resources are driven by a Linux instance. The library aim at providing \
+ long term stable C API initially for the Xen paravirtualization but \
+ should be able to integrate other virtualization mechanisms if needed.
+homepage		http://libvirt.org/
+platforms		darwin
+master_sites	http://libvirt.org/sources/
+distname        libvirt-${version}
+checksums \
+    md5 06eedba78d4848cede7ab1a6e48f6df9 \
+    sha1 8d88541d67a2da50adb85b447b5a01204afeaf7c
+
+depends_lib	\
+	port:libgpg-error port:libgcrypt port:gnutls
+
+patchfiles macosx-fix.patch
+
+set docs 		{ABOUT-NLS AUTHORS COPYING COPYING.LIB ChangeLog ChangeLog-old INSTALL NEWS README TODO}
+
+configure.args 	\
+    --without-xen \
+    --without-sasl \
+    --without-avahi \
+    --without-polkit \
+    --without-qemu \
+    --without-lxc \
+    --without-openvz \
+    --without-libvirtd \
+    --without-uml \
+    --without-vbox
+
+post-destroot {
+	xinstall -d -m 755 ${destroot}${prefix}/share/doc/${name}
+	foreach D ${docs} {
+		xinstall -m 755 ${worksrcpath}/${D} \
+		${destroot}${prefix}/share/doc/${name}
+	}
+}
+
+variant debug description {enable debug} {
+	configure.args-append --enable-debug
+	}
