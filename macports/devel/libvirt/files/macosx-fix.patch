@@ -1,0 +1,48 @@
+diff -Naru libvirt-0.7.5.orig/src/remote/remote_protocol.c libvirt-0.7.5/src/remote/remote_protocol.c
+--- src/remote/remote_protocol.c.orig	2009-12-22 18:37:57.000000000 +0900
++++ src/remote/remote_protocol.c	2011-06-23 10:13:55.000000000 +0900
+@@ -7,6 +7,8 @@
+ #include "./remote/remote_protocol.h"
+ #include "internal.h"
+ #include <arpa/inet.h>
++#define xdr_util32_t xdr_u_int32_t
++#define xdr_util64_t xdr_u_int64_t
+ 
+ bool_t
+ xdr_remote_nonnull_string (XDR *xdrs, remote_nonnull_string *objp)
+diff -Naru libvirt-0.7.5.orig/src/remote/rpcgen_fix.pl libvirt-0.7.5/src/remote/rpcgen_fix.pl
+--- src/remote/rpcgen_fix.pl.orig	2009-12-22 18:37:57.000000000 +0900
++++ src/remote/rpcgen_fix.pl	2011-06-23 10:17:33.000000000 +0900
+@@ -29,7 +29,7 @@
+     # Portability for Solaris RPC
+     s/u_quad_t/uint64_t/g;
+     s/quad_t/int64_t/g;
+-    s/xdr_u_quad_t/xdr_uint64_t/g;
++    s/xdr_u_quad_t/xdr_u_int64_t/g;
+     s/xdr_quad_t/xdr_int64_t/g;
+     s/IXDR_GET_LONG/IXDR_GET_INT32/g;
+     s,#include "\./remote_protocol\.h",#include "remote_protocol.h",;
+diff -Naru libvirt-0.7.5.orig/src/util/network.c libvirt-0.7.5/src/util/network.c
+--- src/util/network.c.orig	2009-12-22 18:37:57.000000000 +0900
++++ src/util/network.c	2011-06-23 10:13:08.000000000 +0900
+@@ -47,7 +47,7 @@
+         return(-1);
+ 
+     for (i = 0;i < 8;i++) {
+-        (*tab)[i] = ntohs(addr->inet6.sin6_addr.s6_addr16[i]);
++        (*tab)[i] = ntohs(addr->inet6.sin6_addr.s6_addr[i]);
+     }
+ 
+     return(0);
+diff -Naru libvirt-0.7.5.orig/tools/virsh.c libvirt-0.7.5/tools/virsh.c
+--- tools/virsh.c.orig	2009-12-22 18:37:57.000000000 +0900
++++ tools/virsh.c	2011-06-23 10:16:53.000000000 +0900
+@@ -7047,7 +7047,7 @@
+         free (command);
+         return -1;
+     }
+-    if (command_ret != WEXITSTATUS (0)) {
++    if (command_ret != 0) {
+         vshError(ctl,
+                  _("%s: command exited with non-zero status"), command);
+         free (command);
