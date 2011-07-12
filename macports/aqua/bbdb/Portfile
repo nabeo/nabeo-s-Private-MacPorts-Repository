@@ -27,7 +27,7 @@ checksums      md5     6668c6bcad5305cff1d1ffa8a71cbaf9 \
 
 depends_lib port:emacs-app
 
-build.env EMACS=${applications_dir}/Emacs.app/Contents/MacOS/Emacs
+build.env EMACS_PROG=${applications_dir}/Emacs.app/Contents/MacOS/Emacs
 
 configure.args --with-emacs=${applications_dir}/Emacs.app/Contents/MacOS/Emacs \
 
