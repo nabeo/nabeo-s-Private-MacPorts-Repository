@@ -1,0 +1,29 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: $
+
+PortSystem 1.0
+
+name		howm
+version		1.3.9.1
+revision	0
+categories	aqua editors utility
+maintainers	nabeo
+description	howm: Write fragmentarily and read collectively
+
+long_description Howm is a note-taking tool on Emacs. It is similar to emacs-wiki, \
+                 you can enjoy hyperlinks and full-text search easily. \
+                 It is not similar to emacs-wiki, it can be combined with any format. \
+
+platforms      darwin
+homepage       http://howm.sourceforge.jp/
+master_sites   http://howm.sourceforge.jp/a/
+checksums      md5     61930f92c4ae2a956dc3cf95e60aa91e \
+               sha1    0b708d389e3c414e22abc18a030f0815b6b0220c \
+               rmd160  c4c870b49458aa9944845763773e8dbdbadd4f3f
+
+depends_lib port:emacs-app
+
+configure.args-append --with-emacs=${applications_dir}/Emacs.app/Contents/MacOS/Emacs
+configure.args-append --with-lispdir=${applications_dir}/Emacs.app/Contents/Resources/site-lisp
+configure.args-append --with-docdir=${applications_dir}/Emacs.app/Contents/Resources/doc/howm
+configure.args-append --with-extdir=${applications_dir}/Emacs.app/Contents/Resources/share/howm/ext
